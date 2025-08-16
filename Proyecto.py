@@ -94,7 +94,7 @@ def quick_sort_stock(lista):
              menores = [x for x in lista[1:] if x.stock < pivote.stock]
              iguales = [x for x in lista[1:] if x.stock == pivote.stock]
              mayores = [x for x in lista[1:] if x.stock > pivote.stock]
-             return quick_sort_stock(menores) + [pivote] + quick_sort_stock(mayores)
+             return quick_sort_stock(menores) + iguales + quick_sort_stock(mayores)
 
 registro = RegistroProductos()
 def menu():
