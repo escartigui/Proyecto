@@ -79,6 +79,7 @@ class RegistroProductos:
          else:
              print("\t Producto no encontrado")
 
+
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
               return lista
@@ -115,8 +116,12 @@ class Busqueda:
             if producto.codigo.upper() == objetivo.upper():
                 return producto
         return None
-class Modificaciones:
-
+class Modificacion:
+    def eliminar(self, productos, codigo):
+        if codigo in productos:
+            del productos[codigo]
+            return True
+        return False
 registro = RegistroProductos()
 def menu():
     while True:
