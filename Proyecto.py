@@ -28,5 +28,13 @@ class RegistroProductos:
                  stock = int(input("Ingresa el stock del producto: "))
                  if stock < 0:
                      print("el stock no puede ser negativo")
+                 self.productos[codigo] = Productos(codigo,nombre,categoria,precio,stock)
          except ValueError:
              print("verifica lo que estas ingresando")
+     def mostrar(self):
+         if not self.productos:
+             print("el producto no existe")
+
+         print("\nListado de Productos")
+         for i, producto in enumerate(self.productos.values(), start=1):
+             print(f"{i}. {producto.mostrar_productos()}")
