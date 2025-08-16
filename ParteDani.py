@@ -98,6 +98,10 @@ def quick_sort_stock(lista):
              iguales = [x for x in lista[1:] if x.stock == pivote.stock]
              mayores = [x for x in lista[1:] if x.stock > pivote.stock]
              return quick_sort_stock(menores) +[pivote]+ iguales + quick_sort_stock(mayores)
+class Busqueda:
+    def busqueda_secuencial(self):
+        objetivo = input("Ingrese el código del producto a buscar: ")
+
 
 registro = RegistroProductos()
 def menu():
