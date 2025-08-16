@@ -72,7 +72,12 @@ class RegistroProductos:
 
      def buscar_producto(self):
          objetivo = input("Ingrese el código del producto a buscar: ")
-         encontrar =
+         encontrar = self.buscador.busqueda_secuencial(self.productos, objetivo)
+         if encontrar:
+             print("\t Producto encontrado")
+             print(encontrar.mostrar_productos())
+         else:
+             print("\t Producto no encontrado")
 
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
@@ -110,6 +115,7 @@ class Busqueda:
             if producto.codigo.upper() == objetivo.upper():
                 return producto
         return None
+class Modificaciones:
 
 registro = RegistroProductos()
 def menu():
