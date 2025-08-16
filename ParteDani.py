@@ -68,6 +68,9 @@ class RegistroProductos:
          print("\nListado de Productos")
          for categoria, producto in enumerate(self.productos.values(), start=1):
           print(f"{categoria}. {producto.mostrar_productos()}")
+    #Parte Dani
+    def buscar_productos(self):
+        objetivo = input("Ingres")
 
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
@@ -99,9 +102,12 @@ def quick_sort_stock(lista):
              mayores = [x for x in lista[1:] if x.stock > pivote.stock]
              return quick_sort_stock(menores) +[pivote]+ iguales + quick_sort_stock(mayores)
 class Busqueda:
-    def busqueda_secuencial(self):
+    def busqueda_secuencial(self, productos, objetivo):
         objetivo = input("Ingrese el código del producto a buscar: ")
-
+        for producto in productos.values():
+            if producto.codigo.upper() == objetivo.upper():
+                return producto
+        return None
 
 registro = RegistroProductos()
 def menu():
