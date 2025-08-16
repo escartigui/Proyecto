@@ -9,22 +9,31 @@ class Productos:
     def mostrar_productos(self):
         return f"Codigo {self.codigo},Nombre {self.nombre} Categoria {self.categoria} Precio {self.precio} Stock {self.stock}"
 
+
 class RegistroProductos:
      def __init__(self):
          self.productos = {}
 
+     def validacion(self):
+             while True:
+                 pregunta = input("\ndesea ingresar los datos de nuevo? (si o no): ")
+                 if pregunta == "no":
+                     break
+                 else:
+                     return self.agregar()
+
      def agregar(self):
          try:
-                 cantidad = int(input("Ingrese la cantidad de productos que desea guardar: "))
+                 cantidad = int(input("\nIngrese la cantidad de productos que desea guardar: "))
                  for i in range(cantidad):
                      print(f"Producto{i+1}")
                      codigo = input("Ingresa el codigo del producto: ")
                      if codigo in self.productos:
                         print("el codigo ya existe")
-                        return self.agregar()
+                        return self.validacion()
                      if codigo == "":
                          print("El codigo no puede quedar vacio")
-                         return self.agregar()
+                         return self.validacion()
                      nombre = input("Ingresa el nombre del producto: ").strip()
                      if nombre == "":
                         print("el nombre no puede quedar vacio")
