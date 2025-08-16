@@ -16,6 +16,7 @@ class Productos:
 class RegistroProductos:
      def __init__(self):
          self.productos = {}
+         self.buscador = Busqueda()
 
      def validacion(self):
              while True:
@@ -68,9 +69,10 @@ class RegistroProductos:
          print("\nListado de Productos")
          for categoria, producto in enumerate(self.productos.values(), start=1):
           print(f"{categoria}. {producto.mostrar_productos()}")
-    #Parte Dani
-    def buscar_productos(self):
-        objetivo = input("Ingres")
+
+     def buscar_producto(self):
+         objetivo = input("Ingrese el código del producto a buscar: ")
+         encontrar =
 
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
