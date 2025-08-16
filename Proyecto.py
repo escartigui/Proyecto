@@ -115,7 +115,7 @@ def menu():
                     print("2.Ordenado por nombre")
                     print("3.Ordenado por precio")
                     print("4.Ordenado por stock")
-                    print("5.Salir")
+                    print("5.Regresar al menu principal")
                     try:
                      op = int(input("Ingrese su opción: "))
                      match op:
