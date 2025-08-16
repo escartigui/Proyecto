@@ -74,7 +74,7 @@ def quick_sort_nombre(lista):
               menores = [x for x in lista[1:] if x.nombre.lower() < pivote.nombre.lower()]
               iguales = [x for x in lista[1:] if x.nombre.lower() == pivote.nombre.lower()]
               mayores = [x for x in lista[1:] if x.nombre.lower() > pivote.nombre.lower()]
-              return quick_sort_nombre(menores) + iguales + quick_sort_nombre(mayores)
+              return quick_sort_nombre(menores) + [pivote] +iguales + quick_sort_nombre(mayores)
 
 def quick_sort_precio(lista):
          if len(lista) <= 1:
@@ -84,7 +84,7 @@ def quick_sort_precio(lista):
              menores = [x for x in lista[1:] if x.precio < pivote.precio]
              iguales = [x for x in lista [1:] if x.precio == pivote.precio]
              mayores = [x for x in lista[1:] if x.precio > pivote.precio]
-             return quick_sort_precio(menores) + iguales + quick_sort_precio(mayores)
+             return quick_sort_precio(menores) +[pivote]+ iguales + quick_sort_precio(mayores)
 
 def quick_sort_stock(lista):
          if len(lista) <= 1:
@@ -94,7 +94,7 @@ def quick_sort_stock(lista):
              menores = [x for x in lista[1:] if x.stock < pivote.stock]
              iguales = [x for x in lista[1:] if x.stock == pivote.stock]
              mayores = [x for x in lista[1:] if x.stock > pivote.stock]
-             return quick_sort_stock(menores) + iguales + quick_sort_stock(mayores)
+             return quick_sort_stock(menores) +[pivote]+ iguales + quick_sort_stock(mayores)
 
 registro = RegistroProductos()
 def menu():
