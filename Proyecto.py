@@ -60,52 +60,52 @@ class RegistroProductos:
      def mostrar(self):
          if not self.productos:
              print("Debes agregar algun producto")
+             return menu()
 
          print("\nListado de Productos")
          for categoria, producto in enumerate(self.productos.values(), start=1):
-             print(f"{categoria}. {producto.mostrar_productos()}")
+          print(f"{categoria}. {producto.mostrar_productos()}")
 
 registro = RegistroProductos()
-while True:
-    print("*---Menu---*")
-    print("1.Agregar Producto")
-    print("2.Mostrar Productos")
-    print("3.salir")
-    try:
-     op = int(input("\nIngrese su opción: "))
-     match op:
-        case 1:
-            registro.agregar()
-        case 2:
-            while True:
-                print("Menu Listado de Productos")
-                print("1.Ordenado por nombre")
-                print("2.Ordenado por precio")
-                print("3.Ordenado por stock")
-                print("4.Mostrar Productos")
-                print("5.Regresar")
-                try:
-                 op = int(input("Ingrese su opción: "))
-                 match op:
-                     case 1:
+def menu():
+    while True:
+      print("\n*---Menu---*")
+      print("1.Agregar Producto")
+      print("2.Listado de Productos")
+      print("3.salir")
+      try:
+        op = int(input("\nIngrese su opción: "))
+        match op:
+            case 1:
+             registro.agregar()
+            case 2:
+                while True:
+                    registro.mostrar()
+                    print("1.Ordenado por nombre")
+                    print("2.Ordenado por precio")
+                    print("3.Ordenado por stock")
+                    print("4.Regresar")
+                    try:
+                     op = int(input("Ingrese su opción: "))
+                     match op:
+                        case 1:
                          print("nombres")
-                     case 2:
+                        case 2:
                          print("precios")
-                     case 3:
+                        case 3:
                          print("stocks")
-                     case 4:
-                        registro.mostrar()
-                     case 5:
+                        case 4:
                          print("Regresando al menu principal")
                          break
-                     case _:
+                        case _:
                          print("Vuelve a intentarlo")
-                except ValueError:
-                 print("Debes ingresar correctamente un valor")
-        case 3:
-            print("\nHasta que nos volvamos a ver :3")
-            break
-        case _:
-            print("Vuelve a intentarlo")
-    except ValueError:
+                    except ValueError:
+                     print("Debes ingresar correctamente un valor")
+            case 3:
+                print("\nHasta que nos volvamos a ver :3")
+                break
+            case _:
+                print("Vuelve a intentarlo")
+      except ValueError:
         print("Error debes ingresar correctamente una opción")
+menu()
