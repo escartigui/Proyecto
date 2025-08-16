@@ -77,7 +77,31 @@ while True:
         case 1:
             registro.agregar()
         case 2:
-            registro.mostrar()
+            while True:
+                print("Menu Listado de Productos")
+                print("1.Ordenado por nombre")
+                print("2.Ordenado por precio")
+                print("3.Ordenado por stock")
+                print("4.Mostrar Productos")
+                print("5.Regresar")
+                try:
+                 op = int(input("Ingrese su opción: "))
+                 match op:
+                     case 1:
+                         print("nombres")
+                     case 2:
+                         print("precios")
+                     case 3:
+                         print("stocks")
+                     case 4:
+                        registro.mostrar()
+                     case 5:
+                         print("Regresando al menu principal")
+                         break
+                     case _:
+                         print("Vuelve a intentarlo")
+                except ValueError:
+                 print("Debes ingresar correctamente un valor")
         case 3:
             print("\nHasta que nos volvamos a ver :3")
             break
