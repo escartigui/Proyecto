@@ -71,25 +71,28 @@ def quick_sort_nombre(lista):
               return lista
           else:
               pivote = lista[0]
-              menores = [x for x in lista[1:] if x.nombre.lower() <= pivote.nombre.lower()]
+              menores = [x for x in lista[1:] if x.nombre.lower() < pivote.nombre.lower()]
+              iguales = [x for x in lista[1:] if x.nombre.lower() == pivote.nombre.lower()]
               mayores = [x for x in lista[1:] if x.nombre.lower() > pivote.nombre.lower()]
-              return quick_sort_nombre(menores) + [pivote] + quick_sort_nombre(mayores)
+              return quick_sort_nombre(menores) + iguales + quick_sort_nombre(mayores)
 
 def quick_sort_precio(lista):
          if len(lista) <= 1:
              return lista
          else:
              pivote = lista[0]
-             menores = [x for x in lista[1:] if x.precio <= pivote.precio]
+             menores = [x for x in lista[1:] if x.precio < pivote.precio]
+             iguales = [x for x in lista [1:] if x.precio == pivote.precio]
              mayores = [x for x in lista[1:] if x.precio > pivote.precio]
-             return quick_sort_precio(menores) + [pivote] + quick_sort_precio(mayores)
+             return quick_sort_precio(menores) + iguales + quick_sort_precio(mayores)
 
 def quick_sort_stock(lista):
          if len(lista) <= 1:
              return lista
          else:
              pivote = lista[0]
-             menores = [x for x in lista[1:] if x.stock <= pivote.stock]
+             menores = [x for x in lista[1:] if x.stock < pivote.stock]
+             iguales = [x for x in lista[1:] if x.stock == pivote.stock]
              mayores = [x for x in lista[1:] if x.stock > pivote.stock]
              return quick_sort_stock(menores) + [pivote] + quick_sort_stock(mayores)
 
@@ -107,7 +110,7 @@ def menu():
              registro.agregar()
             case 2:
                 while True:
-                    print("Menu listado de productos")
+                    print("\nMenu listado de productos")
                     print("1.Mostrar")
                     print("2.Ordenado por nombre")
                     print("3.Ordenado por precio")
@@ -119,11 +122,20 @@ def menu():
                         case 1:
                          registro.ordenar()
                         case 2:
-                         print("Nombres")
+                            productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
+                            print("\nProductos ordenados por nombre:")
+                            for i, p in enumerate(productos_ordenados, start=1):
+                                print(f"{i}. {p.mostrar_productos()}")
                         case 3:
-                         print("Precios")
+                             productos_ordenados = quick_sort_precio(list(registro.productos.values()))
+                             print("\nProductos ordenados por precio:")
+                             for i, p in enumerate(productos_ordenados, start=1):
+                                 print(f"{i}. {p.mostrar_productos()}")
                         case 4:
-                            print("Stocks")
+                             productos_ordenados = quick_sort_stock(list(registro.productos.values()))
+                             print("\nProductos ordenados por stock:")
+                             for i, p in enumerate(productos_ordenados, start=1):
+                                 print(f"{i}. {p.mostrar_productos()}")
                         case 5:
                          print("Regresando al menu principal")
                          break
