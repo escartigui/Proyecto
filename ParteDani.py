@@ -17,6 +17,7 @@ class RegistroProductos:
      def __init__(self):
          self.productos = {}
          self.buscador = Busqueda()
+         self.modificador = Modificacion()
 
      def validacion(self):
              while True:
@@ -78,6 +79,22 @@ class RegistroProductos:
              print(encontrar.mostrar_productos())
          else:
              print("\t Producto no encontrado")
+     def eliminar_producto(self):
+         eliminar = input("Ingrese el código del producto a eliminar: ")
+         encontrar = self.buscador.busqueda_secuencial(self.productos, eliminar)
+         print("\t ¿Está seguro de querer eliminar el producto? Si/No")
+         print(encontrar.mostrar_productos())
+         respuesta = input()
+         if respuesta.upper() == "SI":
+            accion = self.modificador.eliminar(self.productos, eliminar)
+            if accion:
+                 print("\t Producto eliminado")
+            else:
+                print("\t Producto no encontrado")
+         elif respuesta.upper() == "NO":
+             return
+         else:
+             print("\t Opcion no valida. Escriba si o no")
 
 
 def quick_sort_nombre(lista):
