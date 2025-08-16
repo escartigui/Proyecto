@@ -39,7 +39,7 @@ class RegistroProductos:
                         print("el nombre no puede quedar vacio")
                         return self.validacion()
                      categoria = input("Ingresa el categoria del producto: ")
-                     precio = int(input("Ingresa el precio del producto: "))
+                     precio = float(input("Ingresa el precio del producto: "))
                      if precio < 0:
                         print("el precio del producto no puede ser negativo")
                         return self.validacion()
@@ -57,7 +57,7 @@ class RegistroProductos:
          except ValueError:
              print("verifica lo que estas ingresando")
 
-     def mostrar(self):
+     def ordenar(self):
          if not self.productos:
              print("Debes agregar algun producto")
              return menu()
@@ -65,6 +65,33 @@ class RegistroProductos:
          print("\nListado de Productos")
          for categoria, producto in enumerate(self.productos.values(), start=1):
           print(f"{categoria}. {producto.mostrar_productos()}")
+
+def quick_sort_nombre(lista):
+          if len(lista) <= 1:
+              return lista
+          else:
+              pivote = lista[0]
+              menores = [x for x in lista[1:] if x.nombre.lower() <= pivote.nombre.lower()]
+              mayores = [x for x in lista[1:] if x.nombre.lower() > pivote.nombre.lower()]
+              return quick_sort_nombre(menores) + [pivote] + quick_sort_nombre(mayores)
+
+def quick_sort_precio(lista):
+         if len(lista) <= 1:
+             return lista
+         else:
+             pivote = lista[0]
+             menores = [x for x in lista[1:] if x.precio <= pivote.precio]
+             mayores = [x for x in lista[1:] if x.precio > pivote.precio]
+             return quick_sort_precio(menores) + [pivote] + quick_sort_precio(mayores)
+
+def quick_sort_stock(lista):
+         if len(lista) <= 1:
+             return lista
+         else:
+             pivote = lista[0]
+             menores = [x for x in lista[1:] if x.stock <= pivote.stock]
+             mayores = [x for x in lista[1:] if x.stock > pivote.stock]
+             return quick_sort_stock(menores) + [pivote] + quick_sort_stock(mayores)
 
 registro = RegistroProductos()
 def menu():
@@ -80,21 +107,24 @@ def menu():
              registro.agregar()
             case 2:
                 while True:
-                    registro.mostrar()
-                    print("1.Ordenado por nombre")
-                    print("2.Ordenado por precio")
-                    print("3.Ordenado por stock")
-                    print("4.Regresar")
+                    print("Menu listado de productos")
+                    print("1.Mostrar")
+                    print("2.Ordenado por nombre")
+                    print("3.Ordenado por precio")
+                    print("4.Ordenado por stock")
+                    print("5.Salir")
                     try:
                      op = int(input("Ingrese su opción: "))
                      match op:
                         case 1:
-                         print("nombres")
+                         registro.ordenar()
                         case 2:
-                         print("precios")
+                         print("Nombres")
                         case 3:
-                         print("stocks")
+                         print("Precios")
                         case 4:
+                            print("Stocks")
+                        case 5:
                          print("Regresando al menu principal")
                          break
                         case _:
