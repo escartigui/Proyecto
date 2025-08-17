@@ -16,8 +16,8 @@ class RegistroProductos:
 
      def validacion(self):
              while True:
-                 pregunta = input("\ndesea ingresar los datos de nuevo? (si o no): ")
-                 if pregunta == "no":
+                 pregunta = input("\ndesea ingresar los datos de nuevo? (si o no): ").lower()
+                 if pregunta.lower() == "no":
                      break
                  else:
                      return self.agregar()
@@ -27,8 +27,8 @@ class RegistroProductos:
                  cantidad = int(input("\nIngrese la cantidad de productos que desea guardar: "))
                  for i in range(cantidad):
                      print(f"Producto {i+1}")
-                     codigo = input("Ingresa el codigo del producto: ")
-                     if codigo in self.productos:
+                     codigo = input("Ingresa el codigo del producto: ").lower()
+                     if codigo.lower() in self.productos:
                         print("el codigo ya existe")
                         return self.validacion()
                      if codigo == "":
