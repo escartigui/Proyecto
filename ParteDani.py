@@ -95,6 +95,14 @@ class RegistroProductos:
                  print("Opcion no valida. Eliminacion cancelada")
          else:
              print("\t Producto no encontrado")
+     def actualizar_producto(self):
+         actualizar = input("Ingrese el código del producto que desea editar: ")
+         encontrado = self.buscador.busqueda_secuencial(self.productos, actualizar)
+         if encontrado:
+             print(f"Producto {actualizar}")
+             print(encontrado.mostrar_productos())
+             print("Ingrese los nuevos datos del producto: ")
+
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
               return lista
@@ -137,6 +145,9 @@ class Modificacion:
             del productos[codigo]
             return True
         return False
+    def editar(self, producto, datos):
+        producto.precio = datos['precio']
+        producto.stock = datos['stock']
 registro = RegistroProductos()
 def menu():
     while True:
