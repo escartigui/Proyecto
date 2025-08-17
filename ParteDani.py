@@ -101,10 +101,10 @@ class RegistroProductos:
              print(encontrado.mostrar_productos())
              print("Ingrese los nuevos datos del producto(deje en blanco para no cambiar los datos): ")
              try:
-                 precio = float(input("Ingrese el precio del producto: "))
-                 precio_nuevo = precio if precio else encontrado.precio
-                 stock = int(input("Ingrese el stock del producto: "))
-                 stock_nuevo = stock if stock else encontrado.stock
+                 precio = input("Ingrese el precio del producto: ")
+                 precio_nuevo = float(precio) if precio else encontrado.precio
+                 stock = input("Ingrese el stock del producto: ")
+                 stock_nuevo = int(stock) if stock else encontrado.stock
                  if precio_nuevo < 0 or stock_nuevo < 0:
                      print("El precio o el stock no puede ser negativo")
                      return
