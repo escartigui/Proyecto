@@ -1,6 +1,3 @@
-#Parte Daniel
-#Primero copiaré la parte de Escarleth para usar bien
-#las variables que ella usó y saber que funciona mi parte
 class Productos:
     def __init__(self, codigo,nombre,categoria,precio,stock):
         self.codigo = codigo
@@ -154,7 +151,6 @@ def quick_sort_stock(lista):
              return quick_sort_stock(menores) +[pivote]+ iguales + quick_sort_stock(mayores)
 class Busqueda:
     def busqueda_secuencial(self, productos, objetivo):
-        objetivo = input("Ingrese el código del producto a buscar: ")
         for producto in productos.values():
             if producto.codigo.upper() == objetivo.upper():
                 return producto
@@ -233,6 +229,8 @@ def menu():
                         break
                     else:
                         print("Debes ingresar correctamente una opcion")
+            case 5:
+                exit()
             case _:
                 print("Vuelve a intentarlo")
       except ValueError:
