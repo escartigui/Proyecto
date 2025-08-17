@@ -227,8 +227,10 @@ def menu():
                     eleccion = input("Seleccione una opción: ")
                     if eleccion == "1":
                         registro.actualizar_producto()
+                        break
                     elif eleccion == "2":
                         registro.eliminar_producto()
+                        break
                     else:
                         print("Debes ingresar correctamente una opcion")
             case _:
