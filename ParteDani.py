@@ -99,10 +99,30 @@ class RegistroProductos:
          actualizar = input("Ingrese el código del producto que desea editar: ")
          encontrado = self.buscador.busqueda_secuencial(self.productos, actualizar)
          if encontrado:
-             print(f"Producto {actualizar}")
+             print("Producto actual: ")
+             print(f"Precio: {encontrado.precio} | Stock: {encontrado.stock}")
              print(encontrado.mostrar_productos())
-             print("Ingrese los nuevos datos del producto: ")
-
+             print("Ingrese los nuevos datos del producto(deje en blanco para no cambiar los datos): ")
+             while True:
+                precio_nuevo = float(input("Ingrese el precio nuevo del producto: "))
+                if precio_nuevo < 0:
+                    print("El precio no puede ser negativo")
+                else:
+                    break
+             while True:
+                 stock_nuevo = int(input("Ingrese el stock nuevo del producto: "))
+                 if stock_nuevo < 0:
+                     print("La cantidad en stock no puede ser negativo")
+                 else:
+                     break
+             datos_nuevos = {
+                 'precio': precio_nuevo if precio_nuevo else encontrado.precio,
+                 'stock': stock_nuevo if stock_nuevo else encontrado.stock,
+             }
+             self.modificador.editar(encontrado, datos_nuevos)
+             print("Producto actualizado correctamente")
+         else:
+             print("Producto no encontrado")
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
               return lista
@@ -156,7 +176,7 @@ def menu():
       print("1.Agregar Producto")
       print("2.Listado de Productos")
       print("3.Buscar producto")
-      print("4.Eliminar producto")
+      print("4.Actualizar/Eliminar producto")
       try:
         op = int(input("\nIngrese su opción: "))
         match op:
