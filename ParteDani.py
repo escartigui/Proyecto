@@ -100,24 +100,22 @@ class RegistroProductos:
              print(f"Precio: {encontrado.precio} | Stock: {encontrado.stock}")
              print(encontrado.mostrar_productos())
              print("Ingrese los nuevos datos del producto(deje en blanco para no cambiar los datos): ")
-             while True:
-                precio_nuevo = float(input("Ingrese el precio nuevo del producto: "))
-                if precio_nuevo < 0:
-                    print("El precio no puede ser negativo")
-                else:
-                    break
-             while True:
-                 stock_nuevo = int(input("Ingrese el stock nuevo del producto: "))
-                 if stock_nuevo < 0:
-                     print("La cantidad en stock no puede ser negativo")
-                 else:
-                     break
-             datos_nuevos = {
-                 'precio': precio_nuevo if precio_nuevo else encontrado.precio,
-                 'stock': stock_nuevo if stock_nuevo else encontrado.stock,
-             }
-             self.modificador.editar(encontrado, datos_nuevos)
-             print("Producto actualizado correctamente")
+             try:
+                 precio = float(input("Ingrese el precio del producto: "))
+                 precio_nuevo = precio if precio else encontrado.precio
+                 stock = int(input("Ingrese el stock del producto: "))
+                 stock_nuevo = stock if stock else encontrado.stock
+                 if precio_nuevo < 0 or stock_nuevo < 0:
+                     print("El precio o el stock no puede ser negativo")
+                     return
+                 datos_nuevos = {
+                     'precio': precio_nuevo,
+                     'stock': stock_nuevo
+                 }
+                 self.modificador.editar(encontrado, datos_nuevos)
+                 print("Producto actualizado correctamente")
+             except ValueError:
+                 print("El precio y el stock no poseen valores validos. Cancelado operacion")
          else:
              print("Producto no encontrado")
 def quick_sort_nombre(lista):
