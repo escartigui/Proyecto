@@ -82,21 +82,19 @@ class RegistroProductos:
      def eliminar_producto(self):
          eliminar = input("Ingrese el código del producto a eliminar: ")
          encontrar = self.buscador.busqueda_secuencial(self.productos, eliminar)
-         print("\t ¿Está seguro de querer eliminar el producto? Si/No")
-         print(encontrar.mostrar_productos())
-         respuesta = input()
-         if respuesta.upper() == "SI":
-            accion = self.modificador.eliminar(self.productos, eliminar)
-            if accion:
-                 print("\t Producto eliminado")
-            else:
-                print("\t Producto no encontrado")
-         elif respuesta.upper() == "NO":
-             return
+         if encontrar:
+             print(encontrar.mostrar_productos())
+             print("¿Está seguro de eliminar el producto? Si/No")
+             respuesta = input("Ingrese si/no: ").upper()
+             if respuesta == "SI":
+                 self.modificador.eliminar(self.productos, eliminar)
+                 print("Producto eliminado correctamente")
+             elif respuesta == "NO":
+                 print("Operacion cancelada")
+             else:
+                 print("Opcion no valida. Eliminacion cancelada")
          else:
-             print("\t Opcion no valida. Escriba si o no")
-
-
+             print("\t Producto no encontrado")
 def quick_sort_nombre(lista):
           if len(lista) <= 1:
               return lista
@@ -145,7 +143,8 @@ def menu():
       print("\n*---Menu---*")
       print("1.Agregar Producto")
       print("2.Listado de Productos")
-      print("3.salir")
+      print("3.Buscar producto")
+      print("4.Eliminar producto")
       try:
         op = int(input("\nIngrese su opción: "))
         match op:
