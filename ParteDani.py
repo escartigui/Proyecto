@@ -148,6 +148,7 @@ class Modificacion:
     def editar(self, producto, datos):
         producto.precio = datos['precio']
         producto.stock = datos['stock']
+        return True
 registro = RegistroProductos()
 def menu():
     while True:
