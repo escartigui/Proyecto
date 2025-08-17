@@ -97,7 +97,6 @@ class RegistroProductos:
          encontrado = self.buscador.busqueda_secuencial(self.productos, actualizar)
          if encontrado:
              print("Producto actual: ")
-             print(f"Precio: {encontrado.precio} | Stock: {encontrado.stock}")
              print(encontrado.mostrar_productos())
              print("Ingrese los nuevos datos del producto(deje en blanco para no cambiar los datos): ")
              try:
