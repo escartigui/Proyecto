@@ -177,6 +177,7 @@ def menu():
       print("2.Listado de Productos")
       print("3.Buscar producto")
       print("4.Actualizar/Eliminar producto")
+      print("5.Salir")
       try:
         op = int(input("\nIngrese su opción: "))
         match op:
@@ -218,8 +219,18 @@ def menu():
                     except ValueError:
                      print("Debes ingresar correctamente un valor")
             case 3:
-                print("\nHasta que nos volvamos a ver :3")
-                break
+                registro.buscar_producto()
+            case 4:
+                while True:
+                    print("1. Actualizar producto")
+                    print("2. Eliminar producto")
+                    eleccion = input("Seleccione una opción: ")
+                    if eleccion == "1":
+                        registro.actualizar_producto()
+                    elif eleccion == "2":
+                        registro.eliminar_producto()
+                    else:
+                        print("Debes ingresar correctamente una opcion")
             case _:
                 print("Vuelve a intentarlo")
       except ValueError:
