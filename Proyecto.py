@@ -15,7 +15,6 @@ class RegistroProductos:
          self.productos = {}
          self.buscador = Busqueda()
          self.modificador = Modificacion()
-
      def agregar(self):
          try:
                  cantidad = int(input("\nIngrese la cantidad de productos que desea guardar: "))
@@ -155,19 +154,21 @@ def menu():
       print("\n*---Menu---*")
       print("1.Agregar Producto")
       print("2.Listado de Productos")
-      print("3.salir")
+      print("3. Buscar Producto")
+      print("4. Modificar Producto")
+      print("5. Salir")
       try:
         op = int(input("\nIngrese su opción: "))
         match op:
             case 1:
                 while True:
                     print("¿Desea continuar o regresar al menú principal?")
-                    respuesta = input("Si/No")
+                    respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
                             registro.agregar()
                             print("¿Desea efectuar de nuevo la acción?")
-                            afirmacion = input("Si/No")
+                            afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
                                 registro.agregar()
                             elif afirmacion.upper() == "NO":
@@ -193,7 +194,7 @@ def menu():
                         case 1:
                             while True:
                                 print("¿Desea continuar o regresar al menú de listado de productos?")
-                                respuesta = input("Si/No")
+                                respuesta = input("Si/No: ")
                                 if respuesta.upper() == "SI":
                                     registro.ordenar()
                                 elif respuesta.upper() == "NO":
@@ -203,7 +204,7 @@ def menu():
                         case 2:
                             while True:
                                 print("¿Desea continuar o regresar al menú de listado de productos?")
-                                respuesta = input("Si/No")
+                                respuesta = input("Si/No: ")
                                 if respuesta.upper() == "SI":
                                     productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
                                     print("\nProductos ordenados por nombre:")
@@ -216,7 +217,7 @@ def menu():
                         case 3:
                             while True:
                                 print("¿Desea continuar o regresar al menú principal?")
-                                respuesta = input("Si/No")
+                                respuesta = input("Si/No: ")
                                 if respuesta.upper() == "SI":
                                     productos_ordenados = quick_sort_precio(list(registro.productos.values()))
                                     print("\nProductos ordenados por precio:")
@@ -229,7 +230,7 @@ def menu():
                         case 4:
                             while True:
                                 print("¿Desea continuar o regresar al menú de productos?")
-                                respuesta = input("Si/No")
+                                respuesta = input("Si/No: ")
                                 if respuesta.upper() == "SI":
                                     productos_ordenados = quick_sort_stock(list(registro.productos.values()))
                                     print("\nProductos ordenados por stock:")
@@ -245,11 +246,11 @@ def menu():
             case 3:
                 while True:
                     print("¿Desea continuar o regresar al menú principal?")
-                    respuesta = input("Si/No")
+                    respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
                             print("¿Desea efectuar de nuevo la acción?")
-                            afirmacion = input("Si/No")
+                            afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
                                 registro.buscar_producto()
                             elif afirmacion.upper() == "NO":
@@ -264,11 +265,11 @@ def menu():
             case 4:
                 while True:
                     print("¿Desea continuar o regresar al menú principal?")
-                    respuesta = input("Si/No")
+                    respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
                             print("¿Desea repetir la acción?")
-                            afirmacion = input("Si/No")
+                            afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
                                 while True:
                                     print("1. Actualizar producto")
