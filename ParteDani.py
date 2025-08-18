@@ -15,13 +15,6 @@ class RegistroProductos:
          self.productos = {}
          self.buscador = Busqueda()
          self.modificador = Modificacion()
-     def validacion(self):
-             while True:
-                 pregunta = input("\ndesea ingresar los datos de nuevo? (si o no): ").lower()
-                 if pregunta.lower() == "no":
-                     break
-                 else:
-                     return self.agregar()
      def agregar(self):
          try:
                  cantidad = int(input("\nIngrese la cantidad de productos que desea guardar: "))
@@ -30,36 +23,36 @@ class RegistroProductos:
                      codigo = input("Ingresa el codigo del producto: ").lower()
                      if codigo.lower() in self.productos:
                         print("el codigo ya existe")
-                        return self.validacion()
+                        return
                      if codigo == "":
                          print("El codigo no puede quedar vacio")
-                         return self.validacion()
+                         return
                      nombre = input("Ingresa el nombre del producto: ").strip()
                      if nombre == "":
                         print("el nombre no puede quedar vacio")
-                        return self.validacion()
+                        return
                      categoria = input("Ingresa el categoria del producto: ")
                      precio = float(input("Ingresa el precio del producto: "))
                      if precio < 0:
                         print("el precio del producto no puede ser negativo")
-                        return self.validacion()
+                        return
                      if precio == "":
                          print("el precio no puede quedar vacio")
-                         return self.validacion()
+                         return
                      stock = int(input("Ingresa el stock del producto: "))
                      if stock < 0:
                          print("el stock no puede ser negativo")
-                         return self.validacion()
+                         return
                      if stock == "":
                          print("el stock no puede quedar vacio")
-                         return self.validacion()
+                         return
                      self.productos[codigo] = Productos(codigo,nombre,categoria,precio,stock)
          except ValueError:
              print("verifica lo que estas ingresando")
      def ordenar(self):
          if not self.productos:
              print("Debes agregar algun producto")
-             return menu()
+             return
          print("\nListado de Productos")
          for categoria, producto in enumerate(self.productos.values(), start=1):
           print(f"{categoria}. {producto.mostrar_productos()}")
@@ -161,7 +154,9 @@ def menu():
       print("\n*---Menu---*")
       print("1.Agregar Producto")
       print("2.Listado de Productos")
-      print("3.salir")
+      print("3. Buscar Producto")
+      print("4. Modificar Producto")
+      print("5. Salir")
       try:
         op = int(input("\nIngrese su opción: "))
         match op:
