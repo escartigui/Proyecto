@@ -249,6 +249,7 @@ def menu():
                     respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
+                            registro.buscar_producto()
                             print("¿Desea efectuar de nuevo la acción?")
                             afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
@@ -268,6 +269,19 @@ def menu():
                     respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
+                            while True:
+                                print("1. Actualizar producto")
+                                print("2. Eliminar producto")
+                                variable = input("Escoga una opción: ")
+                                if variable == "1":
+                                    registro.actualizar_producto()
+                                    break
+                                elif variable == "2":
+                                    registro.eliminar_producto()
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba 1 o 2")
+                            registro.actualizar_producto()
                             print("¿Desea repetir la acción?")
                             afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
