@@ -162,7 +162,7 @@ def menu():
         match op:
             case 1:
                 while True:
-                    print("¿Desea continuar o regresar al menú principal?")
+                    print("¿Desea continuar(si) o regresar al menú principal(no)?")
                     respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
@@ -203,7 +203,7 @@ def menu():
                                     print("Opción no valida. Por favor escriba si o no")
                         case 2:
                             while True:
-                                print("¿Desea continuar o regresar al menú de listado de productos?")
+                                print("¿Desea continuar(si) o regresar al menú de listado de productos(no)?")
                                 respuesta = input("Si/No: ")
                                 if respuesta.upper() == "SI":
                                     productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
@@ -236,6 +236,10 @@ def menu():
                                     print("\nProductos ordenados por stock:")
                                     for i, p in enumerate(productos_ordenados, start=1):
                                         print(f"{i}. {p.mostrar_productos()}")
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 5:
                          print("Regresando al menu principal")
                          break
