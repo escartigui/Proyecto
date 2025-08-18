@@ -166,7 +166,25 @@ def menu():
         op = int(input("\nIngrese su opción: "))
         match op:
             case 1:
-             registro.agregar()
+                while True:
+                    print("¿Desea continuar o regresar al menú principal?")
+                    respuesta = input("Si/No")
+                    if respuesta.upper() == "SI":
+                        while True:
+                            registro.agregar()
+                            print("¿Desea efectuar de nuevo la acción?")
+                            afirmacion = input("Si/No")
+                            if afirmacion.upper() == "SI":
+                                registro.agregar()
+                            elif afirmacion.upper() == "NO":
+                                break
+                            else:
+                                print("Opción no valida. Por favor escriba si o no")
+                        break
+                    elif respuesta.upper() == "NO":
+                        break
+                    else:
+                        print("Opción no valida. Por favor escriba si o no")
             case 2:
                 while True:
                     print("\nMenu listado de productos")
@@ -179,22 +197,50 @@ def menu():
                      op = int(input("Ingrese su opción: "))
                      match op:
                         case 1:
-                         registro.ordenar()
+                            while True:
+                                print("¿Desea continuar o regresar al menú de listado de productos?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    registro.ordenar()
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 2:
-                            productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
-                            print("\nProductos ordenados por nombre:")
-                            for i, p in enumerate(productos_ordenados, start=1):
-                                print(f"{i}. {p.mostrar_productos()}")
+                            while True:
+                                print("¿Desea continuar o regresar al menú de listado de productos?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
+                                    print("\nProductos ordenados por nombre:")
+                                    for i, p in enumerate(productos_ordenados, start=1):
+                                        print(f"{i}. {p.mostrar_productos()}")
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 3:
-                             productos_ordenados = quick_sort_precio(list(registro.productos.values()))
-                             print("\nProductos ordenados por precio:")
-                             for i, p in enumerate(productos_ordenados, start=1):
-                                 print(f"{i}. {p.mostrar_productos()}")
+                            while True:
+                                print("¿Desea continuar o regresar al menú principal?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    productos_ordenados = quick_sort_precio(list(registro.productos.values()))
+                                    print("\nProductos ordenados por precio:")
+                                    for i, p in enumerate(productos_ordenados, start=1):
+                                        print(f"{i}. {p.mostrar_productos()}")
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 4:
-                             productos_ordenados = quick_sort_stock(list(registro.productos.values()))
-                             print("\nProductos ordenados por stock:")
-                             for i, p in enumerate(productos_ordenados, start=1):
-                                 print(f"{i}. {p.mostrar_productos()}")
+                            while True:
+                                print("¿Desea continuar o regresar al menú de productos?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    productos_ordenados = quick_sort_stock(list(registro.productos.values()))
+                                    print("\nProductos ordenados por stock:")
+                                    for i, p in enumerate(productos_ordenados, start=1):
+                                        print(f"{i}. {p.mostrar_productos()}")
                         case 5:
                          print("Regresando al menu principal")
                          break
