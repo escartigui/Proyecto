@@ -249,20 +249,52 @@ def menu():
                     except ValueError:
                      print("Debes ingresar correctamente un valor")
             case 3:
-                registro.buscar_producto()
-            case 4:
                 while True:
-                    print("1. Actualizar producto")
-                    print("2. Eliminar producto")
-                    eleccion = input("Seleccione una opción: ")
-                    if eleccion == "1":
-                        registro.actualizar_producto()
+                    print("¿Desea continuar o regresar al menú principal?")
+                    respuesta = input("Si/No")
+                    if respuesta.upper() == "SI":
+                        while True:
+                            print("¿Desea efectuar de nuevo la acción?")
+                            afirmacion = input("Si/No")
+                            if afirmacion.upper() == "SI":
+                                registro.buscar_producto()
+                            elif afirmacion.upper() == "NO":
+                                break
+                            else:
+                                print("Opción no valida. Por favor escriba si o no")
                         break
-                    elif eleccion == "2":
-                        registro.eliminar_producto()
+                    elif respuesta.upper() == "NO":
                         break
                     else:
-                        print("Debes ingresar correctamente una opcion")
+                        print("Opción no valida. Por favor escriba si o no")
+            case 4:
+                while True:
+                    print("¿Desea continuar o regresar al menú principal?")
+                    respuesta = input("Si/No")
+                    if respuesta.upper() == "SI":
+                        while True:
+                            print("¿Desea repetir la acción?")
+                            afirmacion = input("Si/No")
+                            if afirmacion.upper() == "SI":
+                                while True:
+                                    print("1. Actualizar producto")
+                                    print("2. Eliminar producto")
+                                    eleccion = input("Seleccione una opción: ")
+                                    if eleccion == "1":
+                                        registro.actualizar_producto()
+                                        break
+                                    elif eleccion == "2":
+                                        registro.eliminar_producto()
+                                        break
+                                    else:
+                                        print("Debes ingresar correctamente una opcion")
+                            elif afirmacion.upper() == "NO":
+                                break
+                        break
+                    elif respuesta.upper() == "NO":
+                        break
+                    else:
+                        print("Opción no valida. Por favor escriba si o no")
             case 5:
                 exit()
             case _:
