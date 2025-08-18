@@ -1,5 +1,3 @@
-#Parte de Daniel
-
      def buscar_producto(self):
          objetivo = input("Ingrese el código del producto a buscar: ")
          encontrar = self.buscador.busqueda_secuencial(self.productos, objetivo)
@@ -40,13 +38,13 @@
                      print("El precio o el stock no puede ser negativo")
                      return
                  datos_nuevos = {
-                     'precio': precio_nuevo,
-                     'stock': stock_nuevo
+                     'precio ':precio_nuevo,
+                     'stock':stock_nuevo,
                  }
                  self.modificador.editar(encontrado, datos_nuevos)
                  print("Producto actualizado correctamente")
              except ValueError:
-                 print("El precio y el stock no poseen valores validos. Cancelado operacion")
+                 print("\t Error. El precio y el stock deben de ser números positivos")
          else:
              print("Producto no encontrado")
 class Busqueda:
