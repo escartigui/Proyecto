@@ -281,7 +281,6 @@ def menu():
                                     break
                                 else:
                                     print("Opción no valida. Por favor escriba 1 o 2")
-                            registro.actualizar_producto()
                             print("¿Desea repetir la acción?")
                             afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
