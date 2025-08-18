@@ -13,14 +13,8 @@ class Productos:
 class RegistroProductos:
      def __init__(self):
          self.productos = {}
-
-     def validacion(self):
-             while True:
-                 pregunta = input("\ndesea ingresar los datos de nuevo? (si o no): ").lower()
-                 if pregunta.lower() == "no":
-                     break
-                 else:
-                     return self.agregar()
+         self.buscador = Busqueda()
+         self.modificador = Modificacion()
 
      def agregar(self):
          try:
@@ -30,72 +24,131 @@ class RegistroProductos:
                      codigo = input("Ingresa el codigo del producto: ").lower()
                      if codigo.lower() in self.productos:
                         print("el codigo ya existe")
-                        return self.validacion()
+                        return
                      if codigo == "":
                          print("El codigo no puede quedar vacio")
-                         return self.validacion()
+                         return
                      nombre = input("Ingresa el nombre del producto: ").strip()
                      if nombre == "":
                         print("el nombre no puede quedar vacio")
-                        return self.validacion()
+                        return
                      categoria = input("Ingresa el categoria del producto: ")
                      precio = float(input("Ingresa el precio del producto: "))
                      if precio < 0:
                         print("el precio del producto no puede ser negativo")
-                        return self.validacion()
+                        return
                      if precio == "":
                          print("el precio no puede quedar vacio")
-                         return self.validacion()
+                         return
                      stock = int(input("Ingresa el stock del producto: "))
                      if stock < 0:
                          print("el stock no puede ser negativo")
-                         return self.validacion()
+                         return
                      if stock == "":
                          print("el stock no puede quedar vacio")
-                         return self.validacion()
+                         return
                      self.productos[codigo] = Productos(codigo,nombre,categoria,precio,stock)
          except ValueError:
              print("verifica lo que estas ingresando")
-
      def ordenar(self):
          if not self.productos:
              print("Debes agregar algun producto")
-             return menu()
-
+             return
          print("\nListado de Productos")
          for categoria, producto in enumerate(self.productos.values(), start=1):
           print(f"{categoria}. {producto.mostrar_productos()}")
-
+     def buscar_producto(self):
+         objetivo = input("Ingrese el código del producto a buscar: ")
+         encontrar = self.buscador.busqueda_secuencial(self.productos, objetivo)
+         if encontrar:
+             print("\t Producto encontrado")
+             print(encontrar.mostrar_productos())
+         else:
+             print("\t Producto no encontrado")
+     def eliminar_producto(self):
+         eliminar = input("Ingrese el código del producto a eliminar: ")
+         encontrar = self.buscador.busqueda_secuencial(self.productos, eliminar)
+         if encontrar:
+             print(encontrar.mostrar_productos())
+             print("¿Está seguro de eliminar el producto? Si/No")
+             respuesta = input("Ingrese si/no: ").upper()
+             if respuesta == "SI":
+                 self.modificador.eliminar(self.productos, eliminar)
+                 print("Producto eliminado correctamente")
+             elif respuesta == "NO":
+                 print("Operacion cancelada")
+             else:
+                 print("Opcion no valida. Eliminacion cancelada")
+         else:
+             print("\t Producto no encontrado")
+     def actualizar_producto(self):
+         actualizar = input("Ingrese el código del producto que desea editar: ")
+         encontrado = self.buscador.busqueda_secuencial(self.productos, actualizar)
+         if encontrado:
+             print("Producto actual: ")
+             print(encontrado.mostrar_productos())
+             print("Ingrese los nuevos datos del producto(deje en blanco para no cambiar los datos): ")
+             try:
+                 precio = input("Ingrese el precio del producto: ")
+                 precio_nuevo = float(precio) if precio else encontrado.precio
+                 stock = input("Ingrese el stock del producto: ")
+                 stock_nuevo = int(stock) if stock else encontrado.stock
+                 if precio_nuevo < 0 or stock_nuevo < 0:
+                     print("El precio o el stock no puede ser negativo")
+                     return
+                 datos_nuevos = {
+                     'precio ':precio_nuevo,
+                     'stock':stock_nuevo,
+                 }
+                 self.modificador.editar(encontrado, datos_nuevos)
+                 print("Producto actualizado correctamente")
+             except ValueError:
+                 print("\t Error. El precio y el stock deben de ser números positivos")
+         else:
+             print("Producto no encontrado")
 def quick_sort_nombre(lista):
-          if len(lista) <= 1:
-              return lista
-          else:
-              pivote = lista[0]
-              menores = [x for x in lista[1:] if x.nombre.lower() < pivote.nombre.lower()]
-              iguales = [x for x in lista[1:] if x.nombre.lower() == pivote.nombre.lower()]
-              mayores = [x for x in lista[1:] if x.nombre.lower() > pivote.nombre.lower()]
-              return quick_sort_nombre(menores) + [pivote] +iguales + quick_sort_nombre(mayores)
-
+    if len(lista) <= 1:
+        return lista
+    else:
+        pivote = lista[0]
+        menores = [x for x in lista[1:] if x.nombre.lower() < pivote.nombre.lower()]
+        iguales = [x for x in lista[1:] if x.nombre.lower() == pivote.nombre.lower()]
+        mayores = [x for x in lista[1:] if x.nombre.lower() > pivote.nombre.lower()]
+        return quick_sort_nombre(menores) + [pivote] + iguales + quick_sort_nombre(mayores)
 def quick_sort_precio(lista):
-         if len(lista) <= 1:
-             return lista
-         else:
-             pivote = lista[0]
-             menores = [x for x in lista[1:] if x.precio < pivote.precio]
-             iguales = [x for x in lista [1:] if x.precio == pivote.precio]
-             mayores = [x for x in lista[1:] if x.precio > pivote.precio]
-             return quick_sort_precio(menores) +[pivote]+ iguales + quick_sort_precio(mayores)
-
+    if len(lista) <= 1:
+        return lista
+    else:
+        pivote = lista[0]
+        menores = [x for x in lista[1:] if x.precio < pivote.precio]
+        iguales = [x for x in lista[1:] if x.precio == pivote.precio]
+        mayores = [x for x in lista[1:] if x.precio > pivote.precio]
+        return quick_sort_precio(menores) + [pivote] + iguales + quick_sort_precio(mayores)
 def quick_sort_stock(lista):
-         if len(lista) <= 1:
-             return lista
-         else:
-             pivote = lista[0]
-             menores = [x for x in lista[1:] if x.stock < pivote.stock]
-             iguales = [x for x in lista[1:] if x.stock == pivote.stock]
-             mayores = [x for x in lista[1:] if x.stock > pivote.stock]
-             return quick_sort_stock(menores) +[pivote]+ iguales + quick_sort_stock(mayores)
-
+    if len(lista) <= 1:
+        return lista
+    else:
+        pivote = lista[0]
+        menores = [x for x in lista[1:] if x.stock < pivote.stock]
+        iguales = [x for x in lista[1:] if x.stock == pivote.stock]
+        mayores = [x for x in lista[1:] if x.stock > pivote.stock]
+        return quick_sort_stock(menores) + [pivote] + iguales + quick_sort_stock(mayores)
+class Busqueda:
+    def busqueda_secuencial(self, productos, objetivo):
+        for producto in productos.values():
+            if producto.codigo.upper() == objetivo.upper():
+                return producto
+        return None
+class Modificacion:
+    def eliminar(self, productos, codigo):
+        if codigo in productos:
+            del productos[codigo]
+            return True
+        return False
+    def editar(self, producto, datos):
+        producto.precio = datos['precio']
+        producto.stock = datos['stock']
+        return True
 registro = RegistroProductos()
 def menu():
     while True:
@@ -107,7 +160,25 @@ def menu():
         op = int(input("\nIngrese su opción: "))
         match op:
             case 1:
-             registro.agregar()
+                while True:
+                    print("¿Desea continuar o regresar al menú principal?")
+                    respuesta = input("Si/No")
+                    if respuesta.upper() == "SI":
+                        while True:
+                            registro.agregar()
+                            print("¿Desea efectuar de nuevo la acción?")
+                            afirmacion = input("Si/No")
+                            if afirmacion.upper() == "SI":
+                                registro.agregar()
+                            elif afirmacion.upper() == "NO":
+                                break
+                            else:
+                                print("Opción no valida. Por favor escriba si o no")
+                        break
+                    elif respuesta.upper() == "NO":
+                        break
+                    else:
+                        print("Opción no valida. Por favor escriba si o no")
             case 2:
                 while True:
                     print("\nMenu listado de productos")
@@ -120,22 +191,50 @@ def menu():
                      op = int(input("Ingrese su opción: "))
                      match op:
                         case 1:
-                         registro.ordenar()
+                            while True:
+                                print("¿Desea continuar o regresar al menú de listado de productos?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    registro.ordenar()
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 2:
-                            productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
-                            print("\nProductos ordenados por nombre:")
-                            for i, p in enumerate(productos_ordenados, start=1):
-                                print(f"{i}. {p.mostrar_productos()}")
+                            while True:
+                                print("¿Desea continuar o regresar al menú de listado de productos?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    productos_ordenados = quick_sort_nombre(list(registro.productos.values()))
+                                    print("\nProductos ordenados por nombre:")
+                                    for i, p in enumerate(productos_ordenados, start=1):
+                                        print(f"{i}. {p.mostrar_productos()}")
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 3:
-                             productos_ordenados = quick_sort_precio(list(registro.productos.values()))
-                             print("\nProductos ordenados por precio:")
-                             for i, p in enumerate(productos_ordenados, start=1):
-                                 print(f"{i}. {p.mostrar_productos()}")
+                            while True:
+                                print("¿Desea continuar o regresar al menú principal?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    productos_ordenados = quick_sort_precio(list(registro.productos.values()))
+                                    print("\nProductos ordenados por precio:")
+                                    for i, p in enumerate(productos_ordenados, start=1):
+                                        print(f"{i}. {p.mostrar_productos()}")
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 4:
-                             productos_ordenados = quick_sort_stock(list(registro.productos.values()))
-                             print("\nProductos ordenados por stock:")
-                             for i, p in enumerate(productos_ordenados, start=1):
-                                 print(f"{i}. {p.mostrar_productos()}")
+                            while True:
+                                print("¿Desea continuar o regresar al menú de productos?")
+                                respuesta = input("Si/No")
+                                if respuesta.upper() == "SI":
+                                    productos_ordenados = quick_sort_stock(list(registro.productos.values()))
+                                    print("\nProductos ordenados por stock:")
+                                    for i, p in enumerate(productos_ordenados, start=1):
+                                        print(f"{i}. {p.mostrar_productos()}")
                         case 5:
                          print("Regresando al menu principal")
                          break
@@ -144,8 +243,54 @@ def menu():
                     except ValueError:
                      print("Debes ingresar correctamente un valor")
             case 3:
-                print("\nHasta que nos volvamos a ver :3")
-                break
+                while True:
+                    print("¿Desea continuar o regresar al menú principal?")
+                    respuesta = input("Si/No")
+                    if respuesta.upper() == "SI":
+                        while True:
+                            print("¿Desea efectuar de nuevo la acción?")
+                            afirmacion = input("Si/No")
+                            if afirmacion.upper() == "SI":
+                                registro.buscar_producto()
+                            elif afirmacion.upper() == "NO":
+                                break
+                            else:
+                                print("Opción no valida. Por favor escriba si o no")
+                        break
+                    elif respuesta.upper() == "NO":
+                        break
+                    else:
+                        print("Opción no valida. Por favor escriba si o no")
+            case 4:
+                while True:
+                    print("¿Desea continuar o regresar al menú principal?")
+                    respuesta = input("Si/No")
+                    if respuesta.upper() == "SI":
+                        while True:
+                            print("¿Desea repetir la acción?")
+                            afirmacion = input("Si/No")
+                            if afirmacion.upper() == "SI":
+                                while True:
+                                    print("1. Actualizar producto")
+                                    print("2. Eliminar producto")
+                                    eleccion = input("Seleccione una opción: ")
+                                    if eleccion == "1":
+                                        registro.actualizar_producto()
+                                        break
+                                    elif eleccion == "2":
+                                        registro.eliminar_producto()
+                                        break
+                                    else:
+                                        print("Debes ingresar correctamente una opcion")
+                            elif afirmacion.upper() == "NO":
+                                break
+                        break
+                    elif respuesta.upper() == "NO":
+                        break
+                    else:
+                        print("Opción no valida. Por favor escriba si o no")
+            case 5:
+                exit()
             case _:
                 print("Vuelve a intentarlo")
       except ValueError:
