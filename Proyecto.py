@@ -96,7 +96,7 @@ class RegistroProductos:
                      print("El precio o el stock no puede ser negativo")
                      return
                  datos_nuevos = {
-                     'precio ':precio_nuevo,
+                     'precio':precio_nuevo,
                      'stock':stock_nuevo,
                  }
                  self.modificador.editar(encontrado, datos_nuevos)
@@ -253,10 +253,12 @@ def menu():
                     respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
+                            registro.buscar_producto()
                             print("¿Desea efectuar de nuevo la acción?")
                             afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
                                 registro.buscar_producto()
+                                break
                             elif afirmacion.upper() == "NO":
                                 break
                             else:
@@ -272,6 +274,18 @@ def menu():
                     respuesta = input("Si/No: ")
                     if respuesta.upper() == "SI":
                         while True:
+                            while True:
+                                print("1. Actualizar producto")
+                                print("2. Eliminar producto")
+                                variable = input("Seleccione una opción: ")
+                                if variable == "1":
+                                    registro.actualizar_producto()
+                                    break
+                                elif variable == "2":
+                                    registro.eliminar_producto()
+                                    break
+                                else:
+                                    print("Opción no valida. Seleccione 1 o 2")
                             print("¿Desea repetir la acción?")
                             afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
