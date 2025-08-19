@@ -254,6 +254,7 @@ def menu():
                             afirmacion = input("Si/No: ")
                             if afirmacion.upper() == "SI":
                                 registro.buscar_producto()
+                                break
                             elif afirmacion.upper() == "NO":
                                 break
                             else:
@@ -296,6 +297,7 @@ def menu():
                                         break
                                     else:
                                         print("Debes ingresar correctamente una opcion")
+                                break
                             elif afirmacion.upper() == "NO":
                                 break
                         break
