@@ -96,7 +96,7 @@ class RegistroProductos:
                      print("El precio o el stock no puede ser negativo")
                      return
                  datos_nuevos = {
-                     'precio ':precio_nuevo,
+                     'precio':precio_nuevo,
                      'stock':stock_nuevo,
                  }
                  self.modificador.editar(encontrado, datos_nuevos)
@@ -236,6 +236,10 @@ def menu():
                                     print("\nProductos ordenados por stock:")
                                     for i, p in enumerate(productos_ordenados, start=1):
                                         print(f"{i}. {p.mostrar_productos()}")
+                                elif respuesta.upper() == "NO":
+                                    break
+                                else:
+                                    print("Opción no valida. Por favor escriba si o no")
                         case 5:
                          print("Regresando al menu principal")
                          break
